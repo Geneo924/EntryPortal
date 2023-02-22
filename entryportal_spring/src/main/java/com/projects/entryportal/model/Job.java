@@ -17,16 +17,11 @@ public class Job {
     // job listing still active ? either return true or false
     private boolean active;
 
-    public Job(String id, String posting, String company, String description, boolean active) {
-        this.id = id;
+    public Job(String posting, String company, String description, boolean active) {
         this.posting = posting;
         this.company = company;
         this.description = description;
         this.active = active;
-    }
-
-    public Job(){
-
     }
 
     public String getId() {
