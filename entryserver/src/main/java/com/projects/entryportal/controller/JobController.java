@@ -47,7 +47,7 @@ public class JobController {
             return new ResponseEntity<>(jobData.get(),HttpStatus.OK);
         }
         else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new JobNotFoundException("Job with ID " + id + "not found");
         }
     }
 
@@ -73,7 +73,7 @@ public class JobController {
             return new ResponseEntity<>(jobRepository.save(_job),HttpStatus.OK);
         }
         else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new JobNotFoundException("Job with ID " + id + "not found");
         }
     }
 
