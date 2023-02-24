@@ -1,5 +1,7 @@
 package com.projects.entryportal.controller;
 
+import com.projects.entryportal.model.Job;
+import com.projects.entryportal.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,15 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.projects.entryportal.model.Job;
-import com.projects.entryportal.repository.JobRepository;
-
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api")
 public class JobController {
 
     @Autowired
     JobRepository jobRepository;
+
+//    @GetMapping("/")
+//    String home(){
+//        return "This works !!";
+//    }
+
 
     @GetMapping("/jobs")
     public ResponseEntity <List <Job>> getAllJobs(@RequestParam(required = false) String posting){
@@ -86,5 +92,5 @@ public class JobController {
 
 
 
-    
+
 }
