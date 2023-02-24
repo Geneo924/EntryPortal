@@ -1,6 +1,6 @@
 package com.projects.entryportal.model;
 
-
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,12 +9,15 @@ public class Job {
     @Id
     private String id;
     // job posting name ex. new grad 23' position
+    @NotBlank(message = "Posting name must not be blank")
     private String posting;
-    // ex. google, facebook
+
+    @NotBlank(message = "Company name must not be blank")
     private String company;
-    // ex. looking for new grads, with no experience
+
+    @NotBlank(message = "Description must not be blank")
     private String description;
-    // job listing still active ? either return true or false
+    @NotBlank(message = "Active must not be blank")
     private boolean active;
 
     public Job(String posting, String company, String description, boolean active) {
