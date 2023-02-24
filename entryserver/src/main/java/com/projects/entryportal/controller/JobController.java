@@ -19,12 +19,6 @@ public class JobController {
     @Autowired
     JobRepository jobRepository;
 
-//    @GetMapping("/")
-//    String home(){
-//        return "This works !!";
-//    }
-
-
     @GetMapping("/jobs")
     public ResponseEntity <List <Job>> getAllJobs(@RequestParam(required = false) String posting){
         try{
@@ -82,15 +76,5 @@ public class JobController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    // will implement in the future
-//    @DeleteMapping("/jobs/{id}")
-//    public ResponseEntity<Job> deleteJob(@PathVariable("id") String id){
-//
-//    }
-//
-
-
-
-
 
 }
