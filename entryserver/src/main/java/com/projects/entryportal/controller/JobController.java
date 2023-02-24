@@ -2,9 +2,11 @@ package com.projects.entryportal.controller;
 
 import com.projects.entryportal.model.Job;
 import com.projects.entryportal.repository.JobRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api")
+@Validated
 public class JobController {
 
     @Autowired
@@ -54,13 +57,9 @@ public class JobController {
     }
 
     @PostMapping("/jobs")
-    public ResponseEntity<Job> postJob(@RequestBody Job job){
-        try{
+    public ResponseEntity<Job> postJob(@Valid @RequestBody Job job){
             Job _job = jobRepository.save(new Job(job.getPosting(), job.getCompany(),job.getDescription(), job.isActive()));
             return new ResponseEntity<>(_job, HttpStatus.CREATED);
-        }catch(Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
     @PutMapping("/jobs/{id}")
     public ResponseEntity<Job> updatedJob(@PathVariable("id") String id, @RequestBody Job job){
