@@ -5,11 +5,13 @@ import com.projects.entryportal.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -75,6 +77,13 @@ public class JobController {
         else{
             throw new JobNotFoundException("Job with ID " + id + "not found");
         }
+    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<String> handleValidationException(MethodArgumentNotValidException ex) {
+        String message = ex.getBindingResult().getFieldErrors().stream()
+                .map(e -> e.getDefaultMessage())
+                .collect(Collectors.joining("; "));
+        return ResponseEntity.badRequest().body(message);
     }
 
 }
